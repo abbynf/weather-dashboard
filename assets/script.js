@@ -16,21 +16,31 @@ var yyyy = today.getFullYear();
 today = mm+'/'+dd+'/'+yyyy;
 console.log(today);
 
-function callTodayForecast(queryUrl){
+function callTodayForecast(cityInput){
 $.ajax({
-    url: queryUrl,
+    url: "https://api.openweathermap.org/data/2.5/weather?q=" + cityInput + "&appid=d8733e2675e82a2b5d5803974ae39653",
     method: 'GET'
 }).then(function(response){
     fillTodayForecast(response);
+    console.log(response)
 })}
 
 
 function callUVI(){
     $.ajax({
-        url: "http://api.openweathermap.org/data/2.5/uvi?appid=d8733e2675e82a2b5d5803974ae39653&lat=" + latit + "&lon=" + long,
+        url: "https://api.openweathermap.org/data/2.5/uvi?appid=d8733e2675e82a2b5d5803974ae39653&lat=" + latit + "&lon=" + long,
         method: 'GET'
     }).then(function(response){
         fillUVI(response);
+    })
+}
+
+function callFutureForecast(){
+    $.ajax({
+        url:"https://api.openweathermap.org/data/2.5/onecall?lat=" + latit + "&lon=" + long + "&appid=d8733e2675e82a2b5d5803974ae39653",
+        method: 'GET'
+    }).then(function(response){
+        console.log(response);
     })
 }
 
@@ -47,9 +57,7 @@ function callAPIs(){
         } else {
         modifiedCity += enteredCity[i] 
     }}
-    todayForecastCity = "q=" + modifiedCity;
-    todayForecastUrl = "https://api.openweathermap.org/data/2.5/weather?" + todayForecastCity + "&appid=d8733e2675e82a2b5d5803974ae39653"
-    callTodayForecast(todayForecastUrl);
+    callTodayForecast(modifiedCity);
 }
 
 
@@ -64,6 +72,7 @@ function fillTodayForecast(response){
     latit = response.coord.lat;
     long = response.coord.lon;
     callUVI();
+    callFutureForecast();
 }
 
 function fillUVI(response){
