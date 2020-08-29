@@ -5,6 +5,8 @@ var modifiedCity;
 var todayForecastCity;
 var todayForecastUrl;
 var enteredCity;
+var long;
+var latit;
 
 var today = new Date();
 var dd = today.getDate();
@@ -23,6 +25,14 @@ $.ajax({
 })}
 
 
+function callUVI(){
+    $.ajax({
+        url: "http://api.openweathermap.org/data/2.5/uvi?appid=d8733e2675e82a2b5d5803974ae39653&lat=" + latit + "&lon=" + long,
+        method: 'GET'
+    }).then(function(response){
+        fillUVI(response);
+    })
+}
 
 // event listener for the search button
 $("#go").on("click", callAPIs)
@@ -42,6 +52,7 @@ function callAPIs(){
     callTodayForecast(todayForecastUrl);
 }
 
+
 function fillTodayForecast(response){
     $("#displayCitySearched").text(enteredCity + " " + today);
     var todayTempF = response.main.temp;
@@ -50,4 +61,13 @@ function fillTodayForecast(response){
     console.log(response);
     $("#todayHum").text("Humidity: " + response.main.humidity + String.fromCharCode(37))
     $("#todayWS").text("Wind speed: " + response.wind.speed + " MPH");
+    latit = response.coord.lat;
+    long = response.coord.lon;
+    callUVI();
 }
+
+function fillUVI(response){
+    console.log(response);
+    $("#todayUVIButton").text(response.value);
+}
+
