@@ -13,7 +13,7 @@ var dd = today.getDate();
 var mm = today.getMonth()+1; 
 var yyyy = today.getFullYear();
 
-today = mm+'/'+dd+'/'+yyyy;
+today = mm+ '/' +dd+ '/' +yyyy;
 console.log(today);
 
 function callTodayForecast(cityInput){
@@ -40,9 +40,38 @@ function callFutureForecast(){
         url:"https://api.openweathermap.org/data/2.5/onecall?lat=" + latit + "&lon=" + long + "&appid=d8733e2675e82a2b5d5803974ae39653",
         method: 'GET'
     }).then(function(response){
+        fillFutureForecast(response);
         console.log(response);
     })
 }
+
+function fillFutureForecast(response){
+    // first future forecast day
+    $("#tomorrowDate").text("today plus one");
+    $("#tomorrow1Temp").text("Temp: " + tempConvert(response.daily[1].temp.day));
+    $("#firstFutureHum").text("Humidity: " + response.daily[1].humidity + String.fromCharCode(37))
+
+    // Second future forecast day
+    // Use moment.js to display the date
+    $("#secondFutureTemp").text("Temp: " + tempConvert(response.daily[2].temp.day));
+    $("#secondFutureHum").text("Humidity: " + response.daily[2].humidity + String.fromCharCode(37));
+
+    // Third future forecast day
+    // Use moment.js to display date
+    $("#thirdFutureTemp").text("Temp: " + tempConvert(response.daily[3].temp.day));
+    $("#thirdFutureHum").text("Humidity: " + response.daily[3].humidity + String.fromCharCode(37));
+
+    // Fourth future forecast day
+    // Use moment.js to display date
+    $("#fourthFutureTemp").text("Temp: " + tempConvert(response.daily[4].temp.day));
+    $("#fourthFutureHum").text("Humidity: " + response.daily[4].humidity + String.fromCharCode(37));
+
+    // Fifth future forecast day
+    // Use moment.js to display date
+    $("#fifthFutureTemp").text("Temp: " + tempConvert(response.daily[5].temp.day));
+    $("#fifthFutureHum").text("Humidity: " + response.daily[5].humidity + String.fromCharCode(37));
+}
+
 
 // event listener for the search button
 $("#go").on("click", callAPIs)
@@ -63,9 +92,7 @@ function callAPIs(){
 
 function fillTodayForecast(response){
     $("#displayCitySearched").text(enteredCity + " " + today);
-    var todayTempF = response.main.temp;
-    var todayTempK = Math.round(((todayTempF - 273.15) * (9/5) + 32)*10) / 10;
-    $("#todayTemp").text("Temperature: " + todayTempK + " F" + String.fromCharCode(176))
+    $("#todayTemp").text("Temperature: " + tempConvert(response.main.temp));
     console.log(response);
     $("#todayHum").text("Humidity: " + response.main.humidity + String.fromCharCode(37))
     $("#todayWS").text("Wind speed: " + response.wind.speed + " MPH");
@@ -80,3 +107,8 @@ function fillUVI(response){
     $("#todayUVIButton").text(response.value);
 }
 
+function tempConvert(K){
+    var tempF = Math.round(((K - 273.15) * (9/5) + 32)*10) / 10;
+    var tempFDegree = tempF + " F" + String.fromCharCode(176);
+    return tempFDegree;
+}
