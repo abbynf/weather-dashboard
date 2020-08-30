@@ -104,9 +104,16 @@ function callAPIs(){
         } else {
         modifiedCity += enteredCity[i] 
     }}
+    saveCitySearch(enteredCity);
+    $("#history").append("<li>" + enteredCity + "</li>")
     callTodayForecast(modifiedCity);
 }
 
+function saveCitySearch(city){
+    var newKey = moment().format("DDMMYYYYhmmss")
+    localStorage.setItem(newKey, city);
+
+}
 
 function fillTodayForecast(response){
     $("#displayCitySearched").text(enteredCity + " (" + today + ")");
