@@ -20,3 +20,16 @@
 .red {
     background-color: red;
 }
+
+h1{
+    text-align: center;
+    background-color: #212121;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.searchFor {
+    font-weight: normal;
+    font-size: 20px;
+}

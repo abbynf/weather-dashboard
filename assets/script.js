@@ -6,14 +6,6 @@ var long;
 var latit;
 var today = moment().format('L')
 
-
-function newFunction(){
-    console.log($("#typedCity").val())
-    console.log(localStorage.getItem("lastSearched"))
-}
-
-newFunction();
-
 callAPIs();
 
 function callTodayForecast(cityInput){
@@ -102,7 +94,6 @@ $("#go").on("click", function(){
 function callAPIs(){
     if ($("#typedCity").val() === ""){
         enteredCity = localStorage.getItem("lastSearched");
-        console.log(localStorage.getItem("lastSearched"))
     } else {
          enteredCity = $("#typedCity").val();
     }
