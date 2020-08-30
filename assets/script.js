@@ -7,8 +7,14 @@ var latit;
 var today = moment().format('L')
 
 
+function newFunction(){
+    console.log($("#typedCity").val())
+    console.log(localStorage.getItem("lastSearched"))
+}
 
+newFunction();
 
+callAPIs();
 
 function callTodayForecast(cityInput){
 $.ajax({
@@ -94,7 +100,12 @@ $("#go").on("click", function(){
 
 
 function callAPIs(){
-    enteredCity = $("#typedCity").val();
+    if ($("#typedCity").val() === ""){
+        enteredCity = localStorage.getItem("lastSearched");
+        console.log(localStorage.getItem("lastSearched"))
+    } else {
+         enteredCity = $("#typedCity").val();
+    }
     var modifiedCity = "";
     for (i=0; i<enteredCity.length; i++){
         if (enteredCity[i] == " "){
@@ -108,12 +119,12 @@ function callAPIs(){
     newItem.text(enteredCity);
     $("ul").append(newItem)
     $(newItem).on('click', function(event){
-        myFunction(event.currentTarget.innerHTML)
+        callSearched(event.currentTarget.innerHTML)
     })
     $("#displayCitySearched").text(enteredCity + " (" + today + ")");
 }
 
-function myFunction(input){
+function callSearched(input){
     var modifiedInput = "";
     for (i=0; i<input.length; i++){
         if (input[i] == " "){
@@ -127,8 +138,7 @@ function myFunction(input){
 
 
 function saveCitySearch(city){
-    var newKey = moment().format("DDMMYYYYhmmss")
-    localStorage.setItem(newKey, city)
+    localStorage.setItem("lastSearched", city)
 }
 
 function fillTodayForecast(response){
