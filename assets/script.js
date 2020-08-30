@@ -50,6 +50,7 @@ function fillFutureForecast(response){
     var futIcon1 = response.daily[1].weather[0].icon
     var futIconUrl1 = "http://openweathermap.org/img/wn/" + futIcon1 +"@2x.png";
     $("#firstFutureIcon").attr("src", futIconUrl1);
+    $("#firstFutureIcon").attr("alt", response.daily[1].weather[0].description)
     $("#tomorrow1Temp").text("Temp: " + tempConvert(response.daily[1].temp.day));
     $("#firstFutureHum").text("Humidity: " + response.daily[1].humidity + String.fromCharCode(37))
 
@@ -58,6 +59,7 @@ function fillFutureForecast(response){
     var futIcon2 = response.daily[2].weather[0].icon
     var futIconUrl2 = "http://openweathermap.org/img/wn/" + futIcon2 +"@2x.png";
     $("#secondFutureIcon").attr("src", futIconUrl2);
+    $("#secondFutureIcon").attr("alt", response.daily[2].weather[0].description)
     $("#secondFutureTemp").text("Temp: " + tempConvert(response.daily[2].temp.day));
     $("#secondFutureHum").text("Humidity: " + response.daily[2].humidity + String.fromCharCode(37));
 
@@ -66,6 +68,7 @@ function fillFutureForecast(response){
     var futIcon3 = response.daily[3].weather[0].icon
     var futIconUrl3 = "http://openweathermap.org/img/wn/" + futIcon3 +"@2x.png";
     $("#thirdFutureIcon").attr("src", futIconUrl3);
+    $("#thirdFutureIcon").attr("alt", response.daily[3].weather[0].description)
     $("#thirdFutureTemp").text("Temp: " + tempConvert(response.daily[3].temp.day));
     $("#thirdFutureHum").text("Humidity: " + response.daily[3].humidity + String.fromCharCode(37));
 
@@ -74,6 +77,7 @@ function fillFutureForecast(response){
     var futIcon4 = response.daily[4].weather[0].icon
     var futIconUrl4 = "http://openweathermap.org/img/wn/" + futIcon4 +"@2x.png";
     $("#fourthFutureIcon").attr("src", futIconUrl4);
+    $("#fourthFutureIcon").attr("alt", response.daily[4].weather[0].description)
     $("#fourthFutureTemp").text("Temp: " + tempConvert(response.daily[4].temp.day));
     $("#fourthFutureHum").text("Humidity: " + response.daily[4].humidity + String.fromCharCode(37));
 
@@ -82,6 +86,7 @@ function fillFutureForecast(response){
     var futIcon5 = response.daily[5].weather[0].icon;
     var futIconUrl5 = "http://openweathermap.org/img/wn/" + futIcon5 +"@2x.png";
     $("#fifthFutureIcon").attr("src", futIconUrl5);
+    $("#fifthFutureIcon").attr("alt", response.daily[5].weather[0].description)
     $("#fifthFutureTemp").text("Temp: " + tempConvert(response.daily[5].temp.day));
     $("#fifthFutureHum").text("Humidity: " + response.daily[5].humidity + String.fromCharCode(37));
 }
