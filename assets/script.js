@@ -6,14 +6,13 @@ var todayForecastCity;
 var enteredCity;
 var long;
 var latit;
+var today = moment().format('L')
+console.log(today)
+var tomorrow = moment().add(1, 'days').format("MM/DD/YYYY");
 
-var today = new Date();
-var dd = today.getDate();
-var mm = today.getMonth()+1; 
-var yyyy = today.getFullYear();
+console.log(tomorrow);
 
-today = mm+ '/' +dd+ '/' +yyyy;
-console.log(today);
+
 
 function callTodayForecast(cityInput){
 $.ajax({
@@ -46,7 +45,7 @@ function callFutureForecast(){
 
 function fillFutureForecast(response){
     // first future forecast day
-    $("#tomorrowDate").text("today plus one");
+    $("#tomorrowDate").text(moment().add(1, 'days').format("MM/DD/YYYY"));
     var futIcon1 = response.daily[1].weather[0].icon
     var futIconUrl1 = "http://openweathermap.org/img/wn/" + futIcon1 +"@2x.png";
     $("#firstFutureIcon").attr("src", futIconUrl1);
@@ -55,7 +54,7 @@ function fillFutureForecast(response){
     $("#firstFutureHum").text("Humidity: " + response.daily[1].humidity + String.fromCharCode(37))
 
     // Second future forecast day
-    // Use moment.js to display the date
+    $("#secondFutureDay").text(moment().add(2, 'days').format("MM/DD/YYYY"))
     var futIcon2 = response.daily[2].weather[0].icon
     var futIconUrl2 = "http://openweathermap.org/img/wn/" + futIcon2 +"@2x.png";
     $("#secondFutureIcon").attr("src", futIconUrl2);
@@ -64,7 +63,7 @@ function fillFutureForecast(response){
     $("#secondFutureHum").text("Humidity: " + response.daily[2].humidity + String.fromCharCode(37));
 
     // Third future forecast day
-    // Use moment.js to display date
+    $("#thirdFutureDay").text(moment().add(3, 'days').format("MM/DD/YYYY"))
     var futIcon3 = response.daily[3].weather[0].icon
     var futIconUrl3 = "http://openweathermap.org/img/wn/" + futIcon3 +"@2x.png";
     $("#thirdFutureIcon").attr("src", futIconUrl3);
@@ -73,7 +72,7 @@ function fillFutureForecast(response){
     $("#thirdFutureHum").text("Humidity: " + response.daily[3].humidity + String.fromCharCode(37));
 
     // Fourth future forecast day
-    // Use moment.js to display date
+    $("#fourthFutureDay").text(moment().add(4, 'days').format("MM/DD/YYYY"));
     var futIcon4 = response.daily[4].weather[0].icon
     var futIconUrl4 = "http://openweathermap.org/img/wn/" + futIcon4 +"@2x.png";
     $("#fourthFutureIcon").attr("src", futIconUrl4);
@@ -82,7 +81,7 @@ function fillFutureForecast(response){
     $("#fourthFutureHum").text("Humidity: " + response.daily[4].humidity + String.fromCharCode(37));
 
     // Fifth future forecast day
-    // Use moment.js to display date
+    $("#fifthFutureDay").text(moment().add(5, 'days').format("MM/DD/YYYY"))
     var futIcon5 = response.daily[5].weather[0].icon;
     var futIconUrl5 = "http://openweathermap.org/img/wn/" + futIcon5 +"@2x.png";
     $("#fifthFutureIcon").attr("src", futIconUrl5);
@@ -110,7 +109,7 @@ function callAPIs(){
 
 
 function fillTodayForecast(response){
-    $("#displayCitySearched").text(enteredCity + " " + today);
+    $("#displayCitySearched").text(enteredCity + " (" + today + ")");
     $("#todayTemp").text("Temperature: " + tempConvert(response.main.temp));
     console.log(response);
     $("#todayHum").text("Humidity: " + response.main.humidity + String.fromCharCode(37))
