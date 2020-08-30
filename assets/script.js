@@ -147,6 +147,15 @@ function fillTodayForecast(response){
 
 function fillUVI(response){
     $("#todayUVIButton").text(response.value);
+    if (0 <= response.value >= 3.33){
+        $("#todayUVIButton").addClass("green");
+    }
+    if (3.34 <= response.value <= 6.66){
+        $("#todayUVIButton").addClass("yellow");
+    }
+    if (6.67 <= response.value <= 10){
+        $("#todayUVIButton").addClass("red");
+    }
 }
 
 function tempConvert(K){
