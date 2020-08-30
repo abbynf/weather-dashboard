@@ -1,5 +1,3 @@
-console.log("hello")
-
 var selectedCity;
 var modifiedCity;
 var todayForecastCity;
@@ -7,10 +5,8 @@ var enteredCity;
 var long;
 var latit;
 var today = moment().format('L')
-console.log(today)
-var tomorrow = moment().add(1, 'days').format("MM/DD/YYYY");
 
-console.log(tomorrow);
+
 
 
 
@@ -20,7 +16,6 @@ $.ajax({
     method: 'GET'
 }).then(function(response){
     fillTodayForecast(response);
-    console.log(response)
 })}
 
 
@@ -39,7 +34,6 @@ function callFutureForecast(){
         method: 'GET'
     }).then(function(response){
         fillFutureForecast(response);
-        console.log(response);
     })
 }
 
@@ -92,7 +86,11 @@ function fillFutureForecast(response){
 
 
 // event listener for the search button
-$("#go").on("click", callAPIs)
+$("#go").on("click", function(){
+    callAPIs();
+})
+
+// event listener for the search history
 
 
 function callAPIs(){
@@ -105,20 +103,37 @@ function callAPIs(){
         modifiedCity += enteredCity[i] 
     }}
     saveCitySearch(enteredCity);
-    $("#history").append("<li>" + enteredCity + "</li>")
     callTodayForecast(modifiedCity);
+    var newItem = $("<li>");
+    newItem.text(enteredCity);
+    $("ul").append(newItem)
+    $(newItem).on('click', function(event){
+        myFunction(event.currentTarget.innerHTML)
+    })
+    $("#displayCitySearched").text(enteredCity + " (" + today + ")");
 }
+
+function myFunction(input){
+    var modifiedInput = "";
+    for (i=0; i<input.length; i++){
+        if (input[i] == " "){
+            modifiedInput += "+"
+        } else {
+        modifiedInput += input[i] 
+    }}
+    callTodayForecast(modifiedInput);
+    $("#displayCitySearched").text(input + " (" + today + ")");
+}
+
 
 function saveCitySearch(city){
     var newKey = moment().format("DDMMYYYYhmmss")
-    localStorage.setItem(newKey, city);
-
+    localStorage.setItem(newKey, city)
 }
 
 function fillTodayForecast(response){
-    $("#displayCitySearched").text(enteredCity + " (" + today + ")");
+
     $("#todayTemp").text("Temperature: " + tempConvert(response.main.temp));
-    console.log(response);
     $("#todayHum").text("Humidity: " + response.main.humidity + String.fromCharCode(37))
     $("#todayWS").text("Wind speed: " + response.wind.speed + " MPH");
     latit = response.coord.lat;
@@ -131,7 +146,6 @@ function fillTodayForecast(response){
 }
 
 function fillUVI(response){
-    console.log(response);
     $("#todayUVIButton").text(response.value);
 }
 
