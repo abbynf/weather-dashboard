@@ -4,7 +4,8 @@ var todayForecastCity;
 var enteredCity;
 var long;
 var latit;
-var today = moment().format('L')
+var today = moment().format('L');
+var indicator;
 
 
 function callTodayForecast(cityInput){
@@ -89,9 +90,26 @@ $("#go").on("click", function(){
 
 // event listener for the search history
 
+callLastSearched();
+
+function callLastSearched(){
+    if (localStorage.getItem("lastSearched") == undefined){
+        return
+    } else {
+        enteredCity = localStorage.getItem("lastSearched")
+        indicator = true;
+    }
+    callAPIs();
+
+}
 
 function callAPIs(){
-    enteredCity = $("#typedCity").val();
+    if (indicator == true){
+        enteredCity = localStorage.getItem("lastSearched");
+    }
+    else {
+        enteredCity = $("#typedCity").val();
+    }
     var modifiedCity = "";
     for (i=0; i<enteredCity.length; i++){
         if (enteredCity[i] == " "){
@@ -108,6 +126,7 @@ function callAPIs(){
         callSearched(event.currentTarget.innerHTML)
     })
     $("#displayCitySearched").text(enteredCity + " (" + today + ")");
+    indicator = false;
 }
 
 function callSearched(input){
