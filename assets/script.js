@@ -6,7 +6,6 @@ var long;
 var latit;
 var today = moment().format('L')
 
-callAPIs();
 
 function callTodayForecast(cityInput){
 $.ajax({
@@ -92,11 +91,7 @@ $("#go").on("click", function(){
 
 
 function callAPIs(){
-    if ($("#typedCity").val() === ""){
-        enteredCity = localStorage.getItem("lastSearched");
-    } else {
-         enteredCity = $("#typedCity").val();
-    }
+    enteredCity = $("#typedCity").val();
     var modifiedCity = "";
     for (i=0; i<enteredCity.length; i++){
         if (enteredCity[i] == " "){
