@@ -39,7 +39,7 @@ function fillFutureForecast(response){
     // first future forecast day
     $("#tomorrowDate").text(moment().add(1, 'days').format("MM/DD/YYYY"));
     var futIcon1 = response.daily[1].weather[0].icon
-    var futIconUrl1 = "http://openweathermap.org/img/wn/" + futIcon1 +"@2x.png";
+    var futIconUrl1 = "https://openweathermap.org/img/wn/" + futIcon1 +"@2x.png";
     $("#firstFutureIcon").attr("src", futIconUrl1);
     $("#firstFutureIcon").attr("alt", response.daily[1].weather[0].description)
     $("#tomorrow1Temp").text("Temp: " + tempConvert(response.daily[1].temp.day));
@@ -48,7 +48,7 @@ function fillFutureForecast(response){
     // Second future forecast day
     $("#secondFutureDay").text(moment().add(2, 'days').format("MM/DD/YYYY"))
     var futIcon2 = response.daily[2].weather[0].icon
-    var futIconUrl2 = "http://openweathermap.org/img/wn/" + futIcon2 +"@2x.png";
+    var futIconUrl2 = "https://openweathermap.org/img/wn/" + futIcon2 +"@2x.png";
     $("#secondFutureIcon").attr("src", futIconUrl2);
     $("#secondFutureIcon").attr("alt", response.daily[2].weather[0].description)
     $("#secondFutureTemp").text("Temp: " + tempConvert(response.daily[2].temp.day));
@@ -57,7 +57,7 @@ function fillFutureForecast(response){
     // Third future forecast day
     $("#thirdFutureDay").text(moment().add(3, 'days').format("MM/DD/YYYY"))
     var futIcon3 = response.daily[3].weather[0].icon
-    var futIconUrl3 = "http://openweathermap.org/img/wn/" + futIcon3 +"@2x.png";
+    var futIconUrl3 = "https://openweathermap.org/img/wn/" + futIcon3 +"@2x.png";
     $("#thirdFutureIcon").attr("src", futIconUrl3);
     $("#thirdFutureIcon").attr("alt", response.daily[3].weather[0].description)
     $("#thirdFutureTemp").text("Temp: " + tempConvert(response.daily[3].temp.day));
@@ -66,7 +66,7 @@ function fillFutureForecast(response){
     // Fourth future forecast day
     $("#fourthFutureDay").text(moment().add(4, 'days').format("MM/DD/YYYY"));
     var futIcon4 = response.daily[4].weather[0].icon
-    var futIconUrl4 = "http://openweathermap.org/img/wn/" + futIcon4 +"@2x.png";
+    var futIconUrl4 = "https://openweathermap.org/img/wn/" + futIcon4 +"@2x.png";
     $("#fourthFutureIcon").attr("src", futIconUrl4);
     $("#fourthFutureIcon").attr("alt", response.daily[4].weather[0].description)
     $("#fourthFutureTemp").text("Temp: " + tempConvert(response.daily[4].temp.day));
@@ -75,7 +75,7 @@ function fillFutureForecast(response){
     // Fifth future forecast day
     $("#fifthFutureDay").text(moment().add(5, 'days').format("MM/DD/YYYY"))
     var futIcon5 = response.daily[5].weather[0].icon;
-    var futIconUrl5 = "http://openweathermap.org/img/wn/" + futIcon5 +"@2x.png";
+    var futIconUrl5 = "https://openweathermap.org/img/wn/" + futIcon5 +"@2x.png";
     $("#fifthFutureIcon").attr("src", futIconUrl5);
     $("#fifthFutureIcon").attr("alt", response.daily[5].weather[0].description)
     $("#fifthFutureTemp").text("Temp: " + tempConvert(response.daily[5].temp.day));
